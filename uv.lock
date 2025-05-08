@@ -1,0 +1,23 @@
+version = 1
+revision = 2
+requires-python = ">=3.12"
+
+[[package]]
+name = "sofficeapi"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "unoserver" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "unoserver", specifier = ">=3.2" }]
+
+[[package]]
+name = "unoserver"
+version = "3.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/18/3e/00ed93bc9784406515f821757008928a4c9d148229cf5c00c5c805edfdec/unoserver-3.2.tar.gz", hash = "sha256:331136b3f0eca52a36e723e2b99f2795f27c8b6d9d8c096ed4ef7ae33cbdf3d2", size = 78467, upload-time = "2025-03-31T14:02:56.729Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d5/2b/ee89ddb3ccabfe571585c643cbda6d36065a234ffb2a21e4663afb5f3310/unoserver-3.2-py3-none-any.whl", hash = "sha256:88c34546aa972fe032896c311f567e3e825f39eab40663649b6c2f5b6ec199b5", size = 23683, upload-time = "2025-03-31T14:02:54.523Z" },
+]
