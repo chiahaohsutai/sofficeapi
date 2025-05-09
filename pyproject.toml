@@ -8,4 +8,5 @@ dependencies = [
     "fastapi[standard]>=0.115.12",
     "python-box>=7.3.2",
     "unoserver>=3.2",
+    "python-dotenv>=1.1.0",
 ]

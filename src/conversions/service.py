@@ -1,10 +1,14 @@
 from contextlib import contextmanager
 from typing import Generator
+import os
 
 from box import Box
 from unoserver.client import UnoClient
 
-PORTS = [2000, 2001]
+PORTS = os.environ.get("SOFFICE_PORTS")
+assert PORTS, "SOFFICE_PORTS not set in .env file"
+
+PORTS = PORTS.split(",")
 workers = [Box({"client": UnoClient(port=p), "load": 0}) for p in PORTS]
 
 
