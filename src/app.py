@@ -33,8 +33,11 @@ async def lifespan(_: FastAPI):
 app = FastAPI(
     lifespan=lifespan,
     title="sofficeapi",
-    description="A simple API for converting documents using LibreOffice",
+    description="A simple API for converting documents to PDF using LibreOffice",
     version="0.1.0",
+    docs_url="/api/docs",
+    redoc_url="/api/redoc",
+    openapi_url="/api/openapi.json"
 )
 
 api_router = APIRouter(prefix="/api")

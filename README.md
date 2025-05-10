@@ -55,3 +55,5 @@ uv sync
 # Start the web server
 uv run fastapi run ./src/app.py
 ```
+
+Visit the [Swagger](http://localhost:8000/api/docs#/) page to see all available endpoints and the required payloads for each enpoint
