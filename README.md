@@ -54,7 +54,7 @@ pip install uv
 uv sync --no-dev
 
 # Start the web server
-uv run fastapi run ./src/app.py
+uv run uvicorn src.app:app --log-level info --port 8000 --host 0.0.0.0
 ```
 
 Visit the [Swagger](http://localhost:8000/api/docs#/) page to see all available endpoints and the required payloads for each enpoint

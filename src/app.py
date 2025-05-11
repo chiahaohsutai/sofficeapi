@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 from os import environ, system
+from logging import getLogger
 
 from fastapi import APIRouter, FastAPI
 
@@ -10,9 +11,11 @@ XMLRPC_PORTS = environ.get("XMLRPC_PORTS", "2000,2001,2002,2003")
 SOFFICE_PORTS = environ.get("SOFFICE_PORTS", "3000,3001,3002,3003")
 CONVERSION_TIMEOUT = environ.get("CONVERSION_TIMEOUT", "60")
 
+logger = getLogger("soffice")
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
+    logger.info("Starting LibreOffice Manager")
     system("pkill -f unoserver.server")
     system("pkill -f soffice")
 
@@ -20,6 +23,7 @@ async def lifespan(_: FastAPI):
     soffice_ports = [int(p) for p in SOFFICE_PORTS.split(",") if p.isdigit()]
 
     if len(xmlrpc_ports) != len(soffice_ports):
+        logger.error("Mismatched number of XMLRPC and SOFFICE ports")
         raise ValueError("Mismatched number of XMLRPC and SOFFICE ports")
 
     manager = LibreOfficeManager(
@@ -28,7 +32,9 @@ async def lifespan(_: FastAPI):
         conversion_timeout=int(CONVERSION_TIMEOUT),
     )
     await manager.start_all()
+    logger.info("LibreOffice Manager started")
     yield
+    logger.info("Stopping LibreOffice Manager")
     manager.stop_all()
 
 
