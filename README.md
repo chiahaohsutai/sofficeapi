@@ -11,6 +11,7 @@ This application manages multiple LibreOffice instances running in listener mode
 - Automatic LibreOffice instance management with crash recovery
 - Lightweight and serverless-friendly
 - Docker-ready for easy containerization and deployment
+- MyPy and Flake8 compliant
 
 **How It Works**
 
@@ -50,7 +51,7 @@ python -m venv .venv
 
 # Install the project dependencies
 pip install uv
-uv sync
+uv sync --no-dev
 
 # Start the web server
 uv run fastapi run ./src/app.py

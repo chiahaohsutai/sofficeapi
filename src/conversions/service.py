@@ -6,7 +6,7 @@ from os import environ
 from subprocess import Popen, TimeoutExpired
 from typing import Generator
 
-from unoserver.client import UnoClient
+from unoserver.client import UnoClient  # type: ignore[import]
 
 XMLRPC_PORTS = environ.get("XMLRPC_PORTS", "2000,2001,2002,2003")
 SOFFICE_PORTS = environ.get("SOFFICE_PORTS", "3000,3001,3002,3003")

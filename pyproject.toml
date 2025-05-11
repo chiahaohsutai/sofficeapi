@@ -10,3 +10,9 @@ dependencies = [
     "python-dotenv>=1.1.0",
     "unoserver>=3.2",
 ]
+
+[dependency-groups]
+dev = [
+    "flake8>=7.2.0",
+    "mypy>=1.15.0",
+]

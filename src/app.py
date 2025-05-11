@@ -8,7 +8,7 @@ from .conversions.service import LibreOfficeManager
 
 XMLRPC_PORTS = environ.get("XMLRPC_PORTS", "2000,2001,2002,2003")
 SOFFICE_PORTS = environ.get("SOFFICE_PORTS", "3000,3001,3002,3003")
-CONVERSION_TIMEOUT = environ.get("CONVERSION_TIMEOUT", 60)
+CONVERSION_TIMEOUT = environ.get("CONVERSION_TIMEOUT", "60")
 
 
 @asynccontextmanager
@@ -18,12 +18,14 @@ async def lifespan(_: FastAPI):
 
     xmlrpc_ports = [int(p) for p in XMLRPC_PORTS.split(",") if p.isdigit()]
     soffice_ports = [int(p) for p in SOFFICE_PORTS.split(",") if p.isdigit()]
-    assert len(xmlrpc_ports) == len(soffice_ports), "Must have the same number of ports"
+
+    if len(xmlrpc_ports) != len(soffice_ports):
+        raise ValueError("Mismatched number of XMLRPC and SOFFICE ports")
 
     manager = LibreOfficeManager(
         xmlrpc_ports=xmlrpc_ports,
         soffice_ports=soffice_ports,
-        conversion_timeout=CONVERSION_TIMEOUT,
+        conversion_timeout=int(CONVERSION_TIMEOUT),
     )
     await manager.start_all()
     yield
@@ -33,7 +35,7 @@ async def lifespan(_: FastAPI):
 app = FastAPI(
     lifespan=lifespan,
     title="sofficeapi",
-    description="A simple API for converting documents to PDF using LibreOffice",
+    description="API for converting files to PDF",
     version="0.1.0",
     docs_url="/api/docs",
     redoc_url="/api/redoc",

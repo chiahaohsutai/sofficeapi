@@ -17,7 +17,10 @@ def convert_to_pdf(file: Base64File):
         new_filename = Path(file.filename).with_suffix(".pdf").name
         new_file = b64encode(pdf).decode("utf-8")
         return Response(
-            content=json.dumps({"filename": new_filename, "content": new_file}),
+            content=json.dumps({
+                "filename": new_filename,
+                "content": new_file,
+            }),
             status_code=200,
             media_type="application/json",
         )
