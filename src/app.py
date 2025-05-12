@@ -11,7 +11,7 @@ XMLRPC_PORTS = environ.get("XMLRPC_PORTS", "2000,2001,2002,2003")
 SOFFICE_PORTS = environ.get("SOFFICE_PORTS", "3000,3001,3002,3003")
 CONVERSION_TIMEOUT = environ.get("CONVERSION_TIMEOUT", "60")
 
-logger = getLogger("soffice")
+logger = getLogger("sofficeapi")
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):

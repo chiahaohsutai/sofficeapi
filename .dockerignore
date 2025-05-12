@@ -1,0 +1,8 @@
+.mypy_cache/
+**/__pycache__/
+tests/
+.env
+.gitignore
+README.md
+.venv/
+.DS_Store

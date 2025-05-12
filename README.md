@@ -31,12 +31,12 @@ This application manages multiple LibreOffice instances running in listener mode
 
 To run this API successfully, `unoserver` must be installed and run using the same Python interpreter that LibreOffice uses internally. If not, the `unoserver` command will fail to connect to LibreOffice. This typically means locating the Python interpreter bundled with LibreOffice and running `pip install unoserver` from that environment. For detailed instructions, refer to the `unoserver` [documentation](https://github.com/unoconv/unoserver).
 
-After installing unoserver, you also need to set an environment variable named SOFFICE_PYTHONPATH. This variable should point to the path of the Python interpreter used by LibreOffice, which is required for the application to locate and use the correct environment during runtime.
+After installing unoserver, you also need to set an environment variable named SOFFICE_PYTHON. This variable should point to the path of the Python interpreter used by LibreOffice, which is required for the application to locate and use the correct environment during runtime.
 
 ```bash
 # Add the required enviorment variables
-export SOFFICE_PYTHONPATH=... # MacOS/Linux (Zsh/Bash)
-$Env:SOFFICE_PYTHONPATH=...   # Windows (Powershell)
+export SOFFICE_PYTHON=... # MacOS/Linux (Zsh/Bash)
+$Env:SOFFICE_PYTHON=...   # Windows (Powershell)
 
 # Clone the repository and change directory to the project root
 git clone <repository-url>
@@ -58,3 +58,16 @@ uv run uvicorn src.app:app --log-level info --port 8000 --host 0.0.0.0
 ```
 
 Visit the [Swagger](http://localhost:8000/api/docs#/) page to see all available endpoints and the required payloads for each enpoint
+
+## Build and Run with Docker
+
+To run this application in a container, ensure Docker is installed on your local machine and the Docker engine is running. Then, execute the following commands:
+
+```bash
+# Change directory into the project root
+cd .../sofficeapi
+
+# Build the docker image
+docker build . -t sofficeapi
+docker run -p 8000:8000 sofficeapi
+```

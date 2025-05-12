@@ -1,6 +1,5 @@
 import logging
 import logging.config
-import sys
 
 from dotenv import load_dotenv
 
@@ -35,7 +34,7 @@ logging.config.dictConfig(
                 "level": "INFO",
                 "propagate": False,
             },
-            "yourapp": {
+            "sofficeapi": {
                 "handlers": ["console"],
                 "level": "DEBUG",
                 "propagate": False,

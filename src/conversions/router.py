@@ -9,7 +9,7 @@ from .schemas import Base64File
 from .service import convert_file
 
 router = APIRouter(prefix="/conversions", tags=["conversions"])
-logger = getLogger("soffice")
+logger = getLogger("sofficeapi")
 
 
 @router.post("/pdf")

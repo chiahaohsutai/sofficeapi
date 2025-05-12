@@ -12,13 +12,13 @@ from unoserver.client import UnoClient  # type: ignore[import]
 XMLRPC_PORTS = environ.get("XMLRPC_PORTS", "2000,2001,2002,2003")
 SOFFICE_PORTS = environ.get("SOFFICE_PORTS", "3000,3001,3002,3003")
 
-SOFFICE_PYTHOPATH = environ.get("SOFFICE_PYTHONPATH")
-assert SOFFICE_PYTHOPATH, "MIssing SOFFICE_PYTHONPATH environment variable"
+SOFFICE_PYTHON = environ.get("SOFFICE_PYTHON")
+assert SOFFICE_PYTHON, "MIssing SOFFICE_PYTHON environment variable"
 
 PORTS = XMLRPC_PORTS.split(",")
 WORKERS = [{"client": UnoClient(port=p), "load": 0} for p in PORTS]
 
-logger = getLogger("soffice")
+logger = getLogger("sofficeapi")
 
 
 @contextmanager
@@ -55,7 +55,7 @@ class LibreOfficeInstance:
     def start(self):
         self.process = Popen(
             [
-                SOFFICE_PYTHOPATH,
+                SOFFICE_PYTHON,
                 "-m",
                 "unoserver.server",
                 "--port",
